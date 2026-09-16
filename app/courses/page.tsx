@@ -1,28 +1,50 @@
 import CourseCard from "@/components/CourseCard";
+import Link from "next/link";
 import { getCourses } from "@/lib/courses";
 
 export default async function CoursesPage() {
   const courses = await getCourses();
-
   return (
-    <main className="mx-auto w-full max-w-5xl px-6 py-12">
-      <h1 className="text-3xl font-bold">Учебные курсы</h1>
-      <p className="mt-4 text-lg text-slate-600">
-        Изучите направления современной веб-разработки.
-      </p>
-      <ul className="mt-8 grid gap-6 md:grid-cols-2">
+    <main id="main-content" className="shell catalog-page">
+      <div className="page-intro">
+        <span className="eyebrow">КАТАЛОГ НАПРАВЛЕНИЙ</span>
+        <h1>
+          Знания, которые
+          <br />
+          <span className="accent-text">открывают возможности.</span>
+        </h1>
+        <p>
+          Выбери, что хочешь создавать. Мы собрали ключевые направления
+          <br className="desktop-break" /> современной веб-разработки в одном
+          месте.
+        </p>
+      </div>
+      <div className="catalog-toolbar">
+        <span className="catalog-pill">
+          Все курсы <span>{courses.length}</span>
+        </span>
+        <span>От интерфейсов до искусственного интеллекта</span>
+      </div>
+      <ul className="course-grid">
         {courses.map((course) => (
           <li key={course.id}>
-            <CourseCard
-              id={course.id}
-              title={course.title}
-              description={course.description}
-              credits={course.credits}
-              likes={course.likes}
-            />
+            <CourseCard {...course} />
           </li>
         ))}
       </ul>
+      <div className="catalog-note">
+        <span aria-hidden="true">↗</span>
+        <p>
+          Не знаешь, с чего начать? <LinkStart />
+        </p>
+      </div>
     </main>
+  );
+}
+function LinkStart() {
+  return (
+    <Link href="/courses/modern-frontend" className="inline-course-link">
+      Познакомься с frontend-разработкой.
+    </Link>
   );
 }

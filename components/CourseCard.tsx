@@ -1,4 +1,6 @@
 import Link from "next/link";
+import CourseArtwork from "./CourseArtwork";
+import { getCourseDesign } from "@/lib/course-design";
 
 type CourseCardProps = {
   id: string;
@@ -15,16 +17,25 @@ export default function CourseCard({
   credits,
   likes,
 }: CourseCardProps) {
+  const design = getCourseDesign(id);
   return (
-    <Link
-      href={`/courses/${id}`}
-      className="flex h-full flex-col rounded-xl border border-slate-200 bg-white p-6 transition-colors hover:border-blue-500 hover:bg-blue-50"
-    >
-      <h2 className="text-xl font-semibold">{title}</h2>
-      <p className="mt-3 flex-1 text-slate-600">{description}</p>
-      <div className="mt-6 flex items-center justify-between gap-4 text-sm">
-        <span>Кредиты: {credits}</span>
-        <span aria-label={`Лайков: ${likes}`}>❤ {likes}</span>
+    <Link href={`/courses/${id}`} className="course-card">
+      <CourseArtwork id={id} />
+      <div className="card-content">
+        <div className="card-kicker">
+          <span>{design.category}</span>
+          <span>{credits} кредитов</span>
+        </div>
+        <h2>{title}</h2>
+        <p>{description}</p>
+        <div className="card-bottom">
+          <span className="card-link">
+            О курсе <span aria-hidden="true">↗</span>
+          </span>
+          <span className="card-likes" aria-label={`Лайков: ${likes}`}>
+            ♡ {likes}
+          </span>
+        </div>
       </div>
     </Link>
   );
