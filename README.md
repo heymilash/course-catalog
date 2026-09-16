@@ -1,36 +1,96 @@
-This is a [Next.js](https://nextjs.org) project bootstrapped with [`create-next-app`](https://nextjs.org/docs/app/api-reference/cli/create-next-app).
+# Course Catalog
 
-## Getting Started
+Учебный каталог курсов для лабораторной работы № 1 по дисциплине Advanced Web Technologies.
 
-First, run the development server:
+## Технологии
+
+Next.js 16 (App Router), React 19, TypeScript и Tailwind CSS 4.
+
+## Возможности
+
+- Главная страница с приветствием и ссылкой на каталог.
+- Страница «О проекте» и общая навигация через next/link.
+- Список шести курсов с типизированными карточками CourseCard.
+- Страница каждого курса с названием, описанием и количеством кредитов.
+- Кнопка лайка с локальным состоянием React.
+- Сообщение о загрузке и страница «Курс не найден».
+- Предварительная генерация страниц курсов через generateStaticParams.
+
+## Запуск
+
+Нужны Node.js 20.9 или новее и npm.
+
+В папке проекта выполните:
 
 ```bash
+npm ci
 npm run dev
-# or
-yarn dev
-# or
-pnpm dev
-# or
-bun dev
 ```
 
-Open [http://localhost:3000](http://localhost:3000) with your browser to see the result.
+Откройте адрес, указанный в терминале рядом с Local (обычно http://localhost:3000).
 
-You can start editing the page by modifying `app/page.tsx`. The page auto-updates as you edit the file.
+## Проверки и сборка
 
-This project uses [`next/font`](https://nextjs.org/docs/app/building-your-application/optimizing/fonts) to automatically optimize and load [Geist](https://vercel.com/font), a new font family for Vercel.
+```bash
+npm run lint
+npm run build
+```
 
-## Learn More
+Для запуска собранной версии:
 
-To learn more about Next.js, take a look at the following resources:
+```bash
+npm run start
+```
 
-- [Next.js Documentation](https://nextjs.org/docs) - learn about Next.js features and API.
-- [Learn Next.js](https://nextjs.org/learn) - an interactive Next.js tutorial.
+Перед запуском на том же порту остановите сервер разработки сочетанием Ctrl+C.
 
-You can check out [the Next.js GitHub repository](https://github.com/vercel/next.js) - your feedback and contributions are welcome!
+## Страницы
 
-## Deploy on Vercel
+| Адрес | Содержимое |
+| --- | --- |
+| `/` | Главная страница |
+| `/about` | О проекте |
+| `/courses` | Список курсов |
+| `/courses/modern-frontend` | Пример страницы курса |
+| `/courses/does-not-exist` | Проверка сообщения «Курс не найден» |
 
-The easiest way to deploy your Next.js app is to use the [Vercel Platform](https://vercel.com/new?utm_medium=default-template&filter=next.js&utm_source=create-next-app&utm_campaign=create-next-app-readme) from the creators of Next.js.
+## Структура
 
-Check out our [Next.js deployment documentation](https://nextjs.org/docs/app/building-your-application/deploying) for more details.
+```text
+app/
+  layout.tsx                  # Общая оболочка и навигация
+  page.tsx                    # Главная страница
+  globals.css                 # Общие стили и Tailwind
+  about/page.tsx              # О проекте
+  courses/
+    page.tsx                  # Список курсов
+    not-found.tsx             # Курс не найден
+    [id]/
+      page.tsx                # Динамическая страница курса
+      loading.tsx             # Загрузка курса
+components/
+  CourseCard.tsx              # Серверная карточка курса
+  LikeButton.tsx              # Клиентская кнопка лайка
+lib/
+  courses.ts                 # Тип Course, данные и функции получения
+```
+
+## Как это работает
+
+Данные находятся в lib/courses.ts. Функции getCourses() и getCourse(id) имитируют ответ сервера с задержкой 300 мс. Страницы получают данные через await. На странице курса параметр params имеет тип Promise<{ id: string }> и также ожидается через await.
+
+Все страницы и CourseCard являются серверными компонентами. Директива "use client" присутствует только в LikeButton.tsx: этот компонент использует useState<number>(initialLikes) и увеличивает счётчик при каждом нажатии.
+
+Лайки хранятся в состоянии кнопки, без базы данных. После перезагрузки страницы счётчик возвращается к исходному значению. Значения в списке курсов остаются исходными.
+
+Сообщение о загрузке может быть кратковременным или не отображаться при переходе к уже подготовленной или закешированной странице.
+
+## Ручная проверка
+
+1. Открыть главную страницу, «О проекте» и список курсов через меню.
+2. Убедиться, что в списке шесть карточек, и открыть каждую.
+3. На первом курсе нажать кнопку лайка: 24 → 25 → 26.
+4. Перезагрузить страницу: исходное значение снова равно 24.
+5. Открыть /courses/does-not-exist и проверить возврат к списку курсов.
+
+Деплой в рамках этой версии не выполнялся.
