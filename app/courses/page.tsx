@@ -25,9 +25,9 @@ export default async function CoursesPage() {
         </span>
         <span>От интерфейсов до искусственного интеллекта</span>
       </div>
-      <ul className="course-grid">
+      <ul className="grid grid-cols-1 gap-4 sm:grid-cols-2 lg:grid-cols-3">
         {courses.map((course) => (
-          <li key={course.id}>
+          <li key={course.id} className="min-w-0">
             <CourseCard {...course} />
           </li>
         ))}

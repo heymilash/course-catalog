@@ -1,16 +1,91 @@
 @import "tailwindcss";
+@import "tw-animate-css";
+@import "shadcn/tailwind.css";
+
+@custom-variant dark (&:is(.dark *));
 
 :root {
   --paper: #faf9f6;
+  --brand: #bf481e;
+  --text-muted: #73736a;
   --ink: #252620;
-  --muted: #73736a;
+  --muted: oklch(0.97 0 0);
   --line: #e5e4dc;
-  --accent: #bf481e;
+  --accent: oklch(0.97 0 0);
   --orange: #eb693a;
+  --background: oklch(1 0 0);
+  --foreground: oklch(0.145 0 0);
+  --card: oklch(1 0 0);
+  --card-foreground: oklch(0.145 0 0);
+  --popover: oklch(1 0 0);
+  --popover-foreground: oklch(0.145 0 0);
+  --primary: oklch(0.205 0 0);
+  --primary-foreground: oklch(0.985 0 0);
+  --secondary: oklch(0.97 0 0);
+  --secondary-foreground: oklch(0.205 0 0);
+  --muted-foreground: oklch(0.556 0 0);
+  --accent-foreground: oklch(0.205 0 0);
+  --destructive: oklch(0.577 0.245 27.325);
+  --border: oklch(0.922 0 0);
+  --input: oklch(0.922 0 0);
+  --ring: oklch(0.708 0 0);
+  --chart-1: oklch(0.87 0 0);
+  --chart-2: oklch(0.556 0 0);
+  --chart-3: oklch(0.439 0 0);
+  --chart-4: oklch(0.371 0 0);
+  --chart-5: oklch(0.269 0 0);
+  --radius: 0.625rem;
+  --sidebar: oklch(0.985 0 0);
+  --sidebar-foreground: oklch(0.145 0 0);
+  --sidebar-primary: oklch(0.205 0 0);
+  --sidebar-primary-foreground: oklch(0.985 0 0);
+  --sidebar-accent: oklch(0.97 0 0);
+  --sidebar-accent-foreground: oklch(0.205 0 0);
+  --sidebar-border: oklch(0.922 0 0);
+  --sidebar-ring: oklch(0.708 0 0);
 }
 @theme inline {
   --font-sans: var(--font-geist-sans);
   --font-mono: var(--font-geist-mono);
+  --font-heading: var(--font-sans);
+  --color-sidebar-ring: var(--sidebar-ring);
+  --color-sidebar-border: var(--sidebar-border);
+  --color-sidebar-accent-foreground: var(--sidebar-accent-foreground);
+  --color-sidebar-accent: var(--sidebar-accent);
+  --color-sidebar-primary-foreground: var(--sidebar-primary-foreground);
+  --color-sidebar-primary: var(--sidebar-primary);
+  --color-sidebar-foreground: var(--sidebar-foreground);
+  --color-sidebar: var(--sidebar);
+  --color-chart-5: var(--chart-5);
+  --color-chart-4: var(--chart-4);
+  --color-chart-3: var(--chart-3);
+  --color-chart-2: var(--chart-2);
+  --color-chart-1: var(--chart-1);
+  --color-ring: var(--ring);
+  --color-input: var(--input);
+  --color-border: var(--border);
+  --color-destructive: var(--destructive);
+  --color-accent-foreground: var(--accent-foreground);
+  --color-accent: var(--accent);
+  --color-muted-foreground: var(--muted-foreground);
+  --color-muted: var(--muted);
+  --color-secondary-foreground: var(--secondary-foreground);
+  --color-secondary: var(--secondary);
+  --color-primary-foreground: var(--primary-foreground);
+  --color-primary: var(--primary);
+  --color-popover-foreground: var(--popover-foreground);
+  --color-popover: var(--popover);
+  --color-card-foreground: var(--card-foreground);
+  --color-card: var(--card);
+  --color-foreground: var(--foreground);
+  --color-background: var(--background);
+  --radius-sm: calc(var(--radius) * 0.6);
+  --radius-md: calc(var(--radius) * 0.8);
+  --radius-lg: var(--radius);
+  --radius-xl: calc(var(--radius) * 1.4);
+  --radius-2xl: calc(var(--radius) * 1.8);
+  --radius-3xl: calc(var(--radius) * 2.2);
+  --radius-4xl: calc(var(--radius) * 2.6);
 }
 * {
   box-sizing: border-box;
@@ -42,7 +117,7 @@ button {
 }
 a:focus-visible,
 button:focus-visible {
-  outline: 3px solid var(--accent);
+  outline: 3px solid var(--brand);
   outline-offset: 5px;
 }
 ::selection {
@@ -92,7 +167,7 @@ button:focus-visible {
 }
 .brand-dot,
 .accent-text {
-  color: var(--accent);
+  color: var(--brand);
 }
 .nav-link {
   font-size: 14px;
@@ -109,7 +184,7 @@ body:has(.about-page) .nav-about {
   display: flex;
   align-items: center;
   gap: 9px;
-  color: var(--muted);
+  color: var(--text-muted);
   font-size: 11px;
 }
 .header-note > span,
@@ -156,7 +231,7 @@ body:has(.about-page) .nav-about {
   letter-spacing: -2.9px;
 }
 .accent-word {
-  color: var(--accent);
+  color: var(--brand);
   position: relative;
   white-space: nowrap;
 }
@@ -205,7 +280,7 @@ body:has(.about-page) .nav-about {
   transform: translateY(-2px);
 }
 .button-primary {
-  background: var(--accent);
+  background: var(--brand);
   color: white;
   box-shadow: 0 4px 0 #a03c1812;
 }
@@ -229,14 +304,14 @@ body:has(.about-page) .nav-about {
 .text-link:hover,
 .back-link:hover,
 .inline-course-link:hover {
-  color: var(--accent);
+  color: var(--brand);
 }
 .hero-footnote {
   display: flex;
   align-items: center;
   gap: 12px;
   margin-top: 34px;
-  color: var(--muted);
+  color: var(--text-muted);
   font-size: 10px;
 }
 .mini-icons {
@@ -476,12 +551,14 @@ body:has(.about-page) .nav-about {
   background: #fffefa;
   border: 1px solid var(--line);
   border-radius: 13px;
+  gap: 0;
   padding: 8px;
   transition:
     transform 0.2s,
     box-shadow 0.2s;
 }
 .course-card:hover {
+  border-color: #93c5fd;
   transform: translateY(-5px);
   box-shadow: 0 12px 30px #3333210c;
 }
@@ -572,8 +649,12 @@ body:has(.about-page) .nav-about {
   right: 16px;
   font-size: 25px;
 }
+.course-card-header {
+  display: block;
+  padding: 19px 15px 0;
+}
 .card-content {
-  padding: 19px 15px 10px;
+  padding: 0 15px 10px;
   flex: 1;
   display: flex;
   flex-direction: column;
@@ -583,7 +664,7 @@ body:has(.about-page) .nav-about {
   justify-content: space-between;
   gap: 8px;
   font-size: 10px;
-  color: var(--muted);
+  color: var(--text-muted);
   margin-bottom: 10px;
 }
 .card-kicker > span:first-child {
@@ -597,7 +678,7 @@ body:has(.about-page) .nav-about {
   margin: 0 0 10px;
 }
 .course-card p {
-  color: var(--muted);
+  color: var(--text-muted);
   font-size: 12px;
   line-height: 1.7;
   margin-bottom: 22px;
@@ -671,7 +752,7 @@ body:has(.about-page) .nav-about {
   font-weight: 700;
 }
 .footer-brand span {
-  color: var(--accent);
+  color: var(--brand);
 }
 .footer-inner p {
   font-size: 11px;
@@ -692,7 +773,7 @@ body:has(.about-page) .nav-about {
   margin: 16px 0 20px;
 }
 .page-intro p {
-  color: var(--muted);
+  color: var(--text-muted);
   font-size: 14px;
   line-height: 1.8;
 }
@@ -725,7 +806,7 @@ body:has(.about-page) .nav-about {
   font-size: 10px;
 }
 .catalog-toolbar > span:last-child {
-  color: var(--muted);
+  color: var(--text-muted);
   font-size: 11px;
 }
 .catalog-note {
@@ -736,12 +817,12 @@ body:has(.about-page) .nav-about {
   padding: 20px 25px;
   border: 1px dashed #d5d8cb;
   border-radius: 10px;
-  color: var(--muted);
+  color: var(--text-muted);
   font-size: 12px;
 }
 .catalog-note > span {
   font-size: 24px;
-  color: var(--accent);
+  color: var(--brand);
 }
 .inline-course-link {
   color: var(--ink);
@@ -753,7 +834,7 @@ body:has(.about-page) .nav-about {
 }
 .back-link {
   font-size: 12px;
-  color: var(--muted);
+  color: var(--text-muted);
 }
 .detail-grid {
   display: grid;
@@ -772,7 +853,7 @@ body:has(.about-page) .nav-about {
 .detail-description {
   font-size: 16px;
   line-height: 1.8;
-  color: var(--muted);
+  color: var(--text-muted);
 }
 .detail-tags {
   display: flex;
@@ -799,7 +880,7 @@ body:has(.about-page) .nav-about {
 }
 .topics-section > p {
   font-size: 12px;
-  color: var(--muted);
+  color: var(--text-muted);
   margin: 7px 0 20px;
 }
 .topics-section ol {
@@ -846,7 +927,7 @@ body:has(.about-page) .nav-about {
 }
 .summary-body > p {
   font-size: 12px;
-  color: var(--muted);
+  color: var(--text-muted);
   margin-top: 8px;
 }
 .summary-body dl {
@@ -861,7 +942,7 @@ body:has(.about-page) .nav-about {
   padding: 11px 0;
 }
 .summary-body dt {
-  color: var(--muted);
+  color: var(--text-muted);
 }
 .summary-body dd {
   text-align: right;
@@ -926,7 +1007,7 @@ body:has(.about-page) .nav-about {
 }
 .about-poster em {
   font-style: normal;
-  color: var(--accent);
+  color: var(--brand);
 }
 .about-poster b {
   position: absolute;
@@ -950,7 +1031,7 @@ body:has(.about-page) .nav-about {
 .about-copy p {
   font-size: 13px;
   line-height: 1.9;
-  color: var(--muted);
+  color: var(--text-muted);
   margin-block: 20px;
 }
 .about-copy strong {
@@ -969,7 +1050,7 @@ body:has(.about-page) .nav-about {
 }
 .about-values span {
   font-size: 9px;
-  color: var(--accent);
+  color: var(--brand);
   letter-spacing: 1.5px;
 }
 .about-values h3 {
@@ -979,7 +1060,7 @@ body:has(.about-page) .nav-about {
 }
 .about-values p {
   font-size: 12px;
-  color: var(--muted);
+  color: var(--text-muted);
   line-height: 1.8;
 }
 .empty-page {
@@ -1002,7 +1083,7 @@ body:has(.about-page) .nav-about {
   position: absolute;
   right: -25px;
   bottom: 18px;
-  color: var(--accent);
+  color: var(--brand);
   font-size: 60px;
 }
 .empty-page h1 {
@@ -1013,7 +1094,7 @@ body:has(.about-page) .nav-about {
 }
 .empty-page p {
   max-width: 430px;
-  color: var(--muted);
+  color: var(--text-muted);
   margin: 14px 0 25px;
   font-size: 14px;
 }
@@ -1126,6 +1207,9 @@ body:has(.about-page) .nav-about {
     gap: 16px;
   }
   .card-content {
+    padding-inline: 9px;
+  }
+  .course-card-header {
     padding-inline: 9px;
   }
   .tech-inner strong {
@@ -1465,5 +1549,51 @@ body:has(.about-page) .nav-about {
   *::after {
     animation: none !important;
     transition: none !important;
+  }
+}
+
+.dark {
+  --background: oklch(0.145 0 0);
+  --foreground: oklch(0.985 0 0);
+  --card: oklch(0.205 0 0);
+  --card-foreground: oklch(0.985 0 0);
+  --popover: oklch(0.205 0 0);
+  --popover-foreground: oklch(0.985 0 0);
+  --primary: oklch(0.922 0 0);
+  --primary-foreground: oklch(0.205 0 0);
+  --secondary: oklch(0.269 0 0);
+  --secondary-foreground: oklch(0.985 0 0);
+  --muted: oklch(0.269 0 0);
+  --muted-foreground: oklch(0.708 0 0);
+  --accent: oklch(0.269 0 0);
+  --accent-foreground: oklch(0.985 0 0);
+  --destructive: oklch(0.704 0.191 22.216);
+  --border: oklch(1 0 0 / 10%);
+  --input: oklch(1 0 0 / 15%);
+  --ring: oklch(0.556 0 0);
+  --chart-1: oklch(0.87 0 0);
+  --chart-2: oklch(0.556 0 0);
+  --chart-3: oklch(0.439 0 0);
+  --chart-4: oklch(0.371 0 0);
+  --chart-5: oklch(0.269 0 0);
+  --sidebar: oklch(0.205 0 0);
+  --sidebar-foreground: oklch(0.985 0 0);
+  --sidebar-primary: oklch(0.488 0.243 264.376);
+  --sidebar-primary-foreground: oklch(0.985 0 0);
+  --sidebar-accent: oklch(0.269 0 0);
+  --sidebar-accent-foreground: oklch(0.985 0 0);
+  --sidebar-border: oklch(1 0 0 / 10%);
+  --sidebar-ring: oklch(0.556 0 0);
+}
+
+@layer base {
+  * {
+    @apply border-border outline-ring/50;
+  }
+  body {
+    @apply bg-background text-foreground;
+  }
+  html {
+    @apply font-sans;
   }
 }
