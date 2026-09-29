@@ -1,3 +1,4 @@
+import { getI18n } from "@/lib/i18n";
 import Link from "next/link";
 import { notFound } from "next/navigation";
 import { getCourse, getCourses } from "@/lib/courses";
@@ -15,6 +16,7 @@ export async function generateStaticParams() {
 }
 
 export default async function CoursePage({ params }: CoursePageProps) {
+  const { t, locale } = await getI18n();
   const { id } = await params;
   const course = await getCourse(id);
 
@@ -25,58 +27,55 @@ export default async function CoursePage({ params }: CoursePageProps) {
 
   return (
     <main id="main-content" className="shell detail-page">
-      <Link href="/courses" className="back-link">
-        ← Назад к курсам
-      </Link>
+      <Link href="/courses" className="back-link"> {t("← Назад к курсам")} </Link>
       <div className="detail-grid">
         <div className="detail-copy">
-          <span className="eyebrow">{design.category} / УЧЕБНЫЙ КУРС</span>
-          <h1>{course.title}</h1>
-          <p className="detail-description">{course.description}</p>
+          <span className="eyebrow">{t(design.category)} {t("/ УЧЕБНЫЙ КУРС")}</span>
+          <h1>{t(course.title)}</h1>
+          <p className="detail-description">{t(course.description)}</p>
           <div className="detail-tags">
-            <span>{course.credits} кредитов</span>
+            <span>{course.credits} {t("кредитов")}</span>
             <span>
-              {course.isElective ? "Курс по выбору" : "Обязательный курс"}
+              {course.isElective ? t("Курс по выбору") : t("Обязательный курс")}
             </span>
           </div>
           <section className="topics-section">
-            <h2>С чем познакомишься</h2>
-            <p>Ключевые темы и технологии этого направления.</p>
+            <h2>{t("С чем познакомишься")}</h2>
+            <p>{t("Ключевые темы и технологии этого направления.")}</p>
             <ol>
               {design.topics.map((topic, index) => (
-                <li key={topic}>
+                <li key={t(topic)}>
                   <span>0{index + 1}</span>
-                  {topic}
+                  {t(topic)}
                   <span aria-hidden="true">↗</span>
                 </li>
               ))}
             </ol>
           </section>
-          <Link href="/courses" className="text-link">
-            Посмотреть другие направления <span aria-hidden="true">→</span>
+          <Link href="/courses" className="text-link"> {t("Посмотреть другие направления")} <span aria-hidden="true">→</span>
           </Link>
         </div>
-        <aside className="course-summary" aria-label="Информация о курсе">
+        <aside className="course-summary" aria-label={t("Информация о курсе")}>
           <CourseArtwork id={id} />
           <div className="summary-body">
-            <span className="eyebrow">ТВОЙ СЛЕДУЮЩИЙ ШАГ</span>
-            <h2>Начни с интереса.</h2>
-            <p>Нравится направление? Поддержи этот курс сердечком.</p>
+            <span className="eyebrow">{t("ТВОЙ СЛЕДУЮЩИЙ ШАГ")}</span>
+            <h2>{t("Начни с интереса.")}</h2>
+            <p>{t("Нравится направление? Поддержи этот курс сердечком.")}</p>
             <dl>
               <div>
-                <dt>Направление</dt>
-                <dd>{design.category}</dd>
+                <dt>{t("Направление")}</dt>
+                <dd>{t(design.category)}</dd>
               </div>
               <div>
-                <dt>Учебная нагрузка</dt>
-                <dd>{course.credits} кредитов</dd>
+                <dt>{t("Учебная нагрузка")}</dt>
+                <dd>{course.credits} {t("кредитов")}</dd>
               </div>
               <div>
-                <dt>Тип курса</dt>
-                <dd>{course.isElective ? "По выбору" : "Обязательный"}</dd>
+                <dt>{t("Тип курса")}</dt>
+                <dd>{course.isElective ? t("По выбору") : t("Обязательный")}</dd>
               </div>
             </dl>
-            <LikeButton key={course.id} initialLikes={course.likes} />
+            <LikeButton key={course.id} initialLikes={course.likes} locale={locale} />
           </div>
         </aside>
       </div>

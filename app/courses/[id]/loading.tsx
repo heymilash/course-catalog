@@ -1,9 +1,9 @@
-export default function CourseLoading() {
+import { getI18n } from "@/lib/i18n";
+export default async function CourseLoading() {
+  const { t } = await getI18n();
   return (
     <main id="main-content" className="shell loading-page">
-      <p role="status" className="eyebrow">
-        Загрузка курса…
-      </p>
+      <p role="status" className="eyebrow"> {t("Загрузка курса…")} </p>
       <div className="loading-grid" aria-hidden="true">
         <div>
           <div className="skeleton skeleton-title" />

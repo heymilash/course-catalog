@@ -1,7 +1,9 @@
+import { getI18n } from "@/lib/i18n";
 import type { Metadata } from "next";
 import Link from "next/link";
 import { Geist, Geist_Mono } from "next/font/google";
 import "./globals.css";
+import LanguageSwitcher from "@/components/LanguageSwitcher";
 
 const geistSans = Geist({ variable: "--font-geist-sans", subsets: ["latin"] });
 const geistMono = Geist_Mono({
@@ -9,56 +11,52 @@ const geistMono = Geist_Mono({
   subsets: ["latin"],
 });
 
-export const metadata: Metadata = {
-  title: "Course — каталог учебных курсов",
+export async function generateMetadata(): Promise<Metadata> {
+ const { t } = await getI18n();
+ return {
+  title: t("Course — каталог учебных курсов"),
   description:
-    "Найди своё направление в современной веб-разработке: frontend, backend, базы данных и AI.",
+    t("Найди своё направление в современной веб-разработке: frontend, backend, базы данных и AI."),
 };
+}
 
-export default function RootLayout({ children }: LayoutProps<"/">) {
+export default async function RootLayout({ children }: LayoutProps<"/">) {
+  const { t, locale } = await getI18n();
   return (
     <html
-      lang="ru"
+      lang={locale}
       className={`${geistSans.variable} ${geistMono.variable} antialiased`}
     >
       <body>
-        <a href="#main-content" className="skip-link">
-          Перейти к содержимому
-        </a>
+        <a href="#main-content" className="skip-link"> {t("Перейти к содержимому")} </a>
         <header className="site-header">
           <div className="shell header-inner">
-            <Link href="/" className="brand" aria-label="Course — главная">
+            <Link href="/" className="brand" aria-label={t("Course — главная")}>
               <span className="brand-symbol">
                 c<span>↗</span>
               </span>
               course<span className="brand-dot">.</span>
             </Link>
             <nav
-              aria-label="Основная навигация"
+              aria-label={t("Основная навигация")}
               className="flex flex-wrap items-center gap-1 sm:gap-3"
             >
               <Link
                 href="/"
                 className="nav-link nav-home rounded-full px-4 py-2 transition-colors hover:bg-orange-50"
-              >
-                Главная
-              </Link>
+              > {t("Главная")} </Link>
               <Link
                 href="/courses"
                 className="nav-link nav-courses rounded-full px-4 py-2 transition-colors hover:bg-orange-50"
-              >
-                Курсы
-              </Link>
+              > {t("Курсы")} </Link>
               <Link
                 href="/about"
                 className="nav-link nav-about rounded-full px-4 py-2 transition-colors hover:bg-orange-50"
-              >
-                О проекте
-              </Link>
+              > {t("О проекте")} </Link>
             </nav>
+            <LanguageSwitcher />
             <span className="header-note">
-              <span /> Учись. Создавай. Развивайся.
-            </span>
+              <span /> {t("Учись. Создавай. Развивайся.")} </span>
           </div>
         </header>
         {children}
@@ -67,7 +65,7 @@ export default function RootLayout({ children }: LayoutProps<"/">) {
             <Link href="/" className="footer-brand">
               course<span>.</span>
             </Link>
-            <p>Маленький шаг сегодня. Большие возможности завтра.</p>
+            <p>{t("Маленький шаг сегодня. Большие возможности завтра.")}</p>
             <span>Advanced Web Technologies · 2026</span>
           </div>
         </footer>

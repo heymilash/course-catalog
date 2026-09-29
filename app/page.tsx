@@ -1,33 +1,27 @@
+import { getI18n } from "@/lib/i18n";
 import Link from "next/link";
 import CourseCard from "@/components/CourseCard";
+import { Button } from "@/components/ui/button";
 import { getCourses } from "@/lib/courses";
 
 export default async function Home() {
+  const { t } = await getI18n();
   const courses = await getCourses();
   return (
     <main id="main-content" className="home-page">
       <section className="shell hero">
         <div className="hero-copy">
           <span className="eyebrow">
-            <span className="status-dot" /> ТВОЙ СЛЕДУЮЩИЙ ШАГ
-          </span>
-          <h1>
-            Большие идеи
-            <br />
-            начинаются
-            <br />с <span className="accent-word">новых знаний.</span>
+            <span className="status-dot" /> {t("ТВОЙ СЛЕДУЮЩИЙ ШАГ")} </span>
+          <h1> {t("Большие идеи")} <br /> {t("начинаются")} <br />{t("с")} <span className="accent-word">{t("новых знаний.")}</span>
           </h1>
-          <p className="hero-description">
-            От первого интерфейса до искусственного интеллекта.
-            <br className="desktop-break" /> Найди своё направление в мире
-            веб-разработки.
-          </p>
+          <p className="hero-description"> {t("От первого интерфейса до искусственного интеллекта.")} <br className="desktop-break" /> {t("Найди своё направление в мире веб-разработки.")} </p>
           <div className="hero-actions">
-            <Link href="/courses" className="button button-primary">
-              Выбрать курс <span aria-hidden="true">↗</span>
-            </Link>
-            <Link href="/about" className="text-link">
-              Познакомиться с проектом <span aria-hidden="true">→</span>
+            <Button asChild variant="brand" className="min-h-[50px] gap-6 px-6 text-[13px]">
+              <Link href="/courses"> {t("Выбрать курс")} <span aria-hidden="true">↗</span>
+              </Link>
+            </Button>
+            <Link href="/about" className="text-link"> {t("Познакомиться с проектом")} <span aria-hidden="true">→</span>
             </Link>
           </div>
           <div className="hero-footnote">
@@ -36,19 +30,17 @@ export default async function Home() {
               <i>{"{ }"}</i>
               <i>✳</i>
             </span>
-            <span>6 направлений. Множество возможностей.</span>
+            <span>{t("6 направлений. Множество возможностей.")}</span>
           </div>
         </div>
         <div
           className="hero-art"
-          aria-label="Иллюстрация: от идеи к работающему приложению"
+          aria-label={t("Иллюстрация: от идеи к работающему приложению")}
           role="img"
         >
           <span className="hero-ring ring-one" />
           <span className="hero-ring ring-two" />
-          <span className="floating-label label-top">
-            ✦ Идеи становятся кодом
-          </span>
+          <span className="floating-label label-top"> {t("✦ Идеи становятся кодом")} </span>
           <div className="code-window">
             <div className="window-bar">
               <span className="window-dots">
@@ -61,7 +53,7 @@ export default async function Home() {
             </div>
             <div className="code-body">
               <span className="code-comment">
-                {"// всё начинается с любопытства"}
+                {t("// всё начинается с любопытства")}
               </span>
               <br />
               <br />
@@ -89,14 +81,12 @@ export default async function Home() {
           <span className="floating-symbol symbol-code">{"</>"}</span>
           <span className="floating-symbol symbol-star">✳</span>
           <span className="floating-label label-bottom">
-            <span className="small-check">✓</span> Новый навык — новые
-            возможности
-          </span>
+            <span className="small-check">✓</span> {t("Новый навык — новые возможности")} </span>
         </div>
       </section>
       <div className="tech-strip">
         <div className="shell tech-inner">
-          <span>ТЕХНОЛОГИИ, КОТОРЫЕ ВДОХНОВЛЯЮТ</span>
+          <span>{t("ТЕХНОЛОГИИ, КОТОРЫЕ ВДОХНОВЛЯЮТ")}</span>
           <strong>React</strong>
           <strong>Next.js</strong>
           <strong>Python</strong>
@@ -107,11 +97,10 @@ export default async function Home() {
       <section className="shell section-space">
         <div className="section-heading">
           <div>
-            <span className="eyebrow">ВЫБИРАЙ СВОЁ НАПРАВЛЕНИЕ</span>
-            <h2>С чего начнёшь ты?</h2>
+            <span className="eyebrow">{t("ВЫБИРАЙ СВОЁ НАПРАВЛЕНИЕ")}</span>
+            <h2>{t("С чего начнёшь ты?")}</h2>
           </div>
-          <Link href="/courses" className="text-link">
-            Все 6 курсов <span aria-hidden="true">↗</span>
+          <Link href="/courses" className="text-link"> {t("Все 6 курсов")} <span aria-hidden="true">↗</span>
           </Link>
         </div>
         <ul className="course-grid">
@@ -125,15 +114,10 @@ export default async function Home() {
       <section className="shell">
         <div className="closing-banner">
           <div>
-            <span className="eyebrow">ОТ ЛЮБОПЫТСТВА К НАВЫКАМ</span>
-            <h2>
-              Твоя следующая идея
-              <br />
-              заслуживает реализации.
-            </h2>
+            <span className="eyebrow">{t("ОТ ЛЮБОПЫТСТВА К НАВЫКАМ")}</span>
+            <h2> {t("Твоя следующая идея")} <br /> {t("заслуживает реализации.")} </h2>
           </div>
-          <Link href="/courses" className="button button-dark">
-            Найти свой курс <span aria-hidden="true">↗</span>
+          <Link href="/courses" className="button button-dark"> {t("Найти свой курс")} <span aria-hidden="true">↗</span>
           </Link>
           <span className="banner-star" aria-hidden="true">
             ✳
