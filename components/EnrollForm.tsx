@@ -31,7 +31,7 @@ export function EnrollForm({ courseId, locale }: { courseId: string; locale: Loc
       }
       if (!res.ok) throw new Error(`API error: ${res.status}`);
       const enrollment: Enrollment = await res.json();
-      setMessage(`${t("Номер записи:")} ${enrollment.id}`);
+      setMessage(String(enrollment.id));
       setStatus("done");
     } catch {
       setStatus("error");
@@ -53,7 +53,9 @@ export function EnrollForm({ courseId, locale }: { courseId: string; locale: Loc
         <button type="submit" disabled={status === "sending"} className="button button-primary">
           {status === "sending" ? t("Отправка…") : t("Записаться")}
         </button>
-        {status === "done" && <p role="status">{t("Вы записаны.")} {message}</p>}
+        {status === "done" && (
+          <p role="status">{t("Вы записаны.")} {t("Номер записи:")} {message}</p>
+        )}
         {status === "rejected" && (
           <p role="alert" className="form-error">{t("Сервер отклонил данные:")} {message}</p>
         )}
