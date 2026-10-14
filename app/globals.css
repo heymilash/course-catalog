@@ -1690,3 +1690,19 @@ body:has(.about-page) .nav-about {
 }
 .filter-results a:hover { color: var(--brand); }
 .filter-meta { font-size: 12px; color: var(--text-muted); }
+.enrollment-section { margin-top: 28px; border-top: 1px solid var(--line); padding-top: 24px; }
+.enrollment-section h3 { font-size: 18px; font-weight: 600; margin-bottom: 16px; }
+.enrollment-form { display: flex; flex-direction: column; gap: 10px; font-size: 13px; }
+.enrollment-form input {
+  width: 100%;
+  min-width: 0;
+  border: 1px solid var(--line);
+  border-radius: 8px;
+  padding: 12px;
+  background: var(--background);
+  color: var(--foreground);
+}
+.enrollment-form p { line-height: 1.6; overflow-wrap: anywhere; }
+.form-error { color: #b42318; font-size: 13px; margin-top: 8px; }
+button:disabled { cursor: wait; opacity: 0.6; }
+@media (prefers-color-scheme: dark) { .form-error { color: #fca5a5; } }

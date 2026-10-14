@@ -3,6 +3,7 @@ import Link from "next/link";
 import { notFound } from "next/navigation";
 import { getCourse } from "@/lib/courses";
 import LikeButton from "@/components/LikeButton";
+import { EnrollForm } from "@/components/EnrollForm";
 import CourseArtwork from "@/components/CourseArtwork";
 import { getCourseDesign } from "@/lib/course-design";
 
@@ -70,7 +71,8 @@ export default async function CoursePage({ params }: CoursePageProps) {
                 <dd>{course.isElective ? t("По выбору") : t("Обязательный")}</dd>
               </div>
             </dl>
-            <LikeButton key={course.id} initialLikes={course.likes} locale={locale} />
+            <LikeButton key={`${course.id}:${course.likes}`} courseId={course.id} initialLikes={course.likes} locale={locale} />
+            <EnrollForm courseId={course.id} locale={locale} />
           </div>
         </aside>
       </div>

@@ -2,6 +2,16 @@ export type Locale = "en" | "ru";
 
 // Russian copy is the lookup key; technical names may be shared by both languages.
 const english: Record<string, string> = {
+  "Не удалось поставить лайк": "Failed to like the course",
+  "Записаться на курс": "Enroll in this course",
+  "Ваше имя": "Your name",
+  "Записаться": "Enroll",
+  "Отправка…": "Sending…",
+  "Номер записи:": "Enrollment number:",
+  "Вы записаны.": "You are enrolled.",
+  "Сервер отклонил данные:": "The server rejected the data:",
+  "Не удалось отправить заявку": "Could not submit the enrollment",
+  "Проверьте введённые данные": "Check the entered data",
   "Фильтр": "Filter",
   "Фильтр курсов": "Course filter",
   "Только курсы по выбору": "Electives only",
