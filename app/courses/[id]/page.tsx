@@ -1,7 +1,7 @@
 import { getI18n } from "@/lib/i18n";
 import Link from "next/link";
 import { notFound } from "next/navigation";
-import { getCourse, getCourses } from "@/lib/courses";
+import { getCourse } from "@/lib/courses";
 import LikeButton from "@/components/LikeButton";
 import CourseArtwork from "@/components/CourseArtwork";
 import { getCourseDesign } from "@/lib/course-design";
@@ -9,11 +9,6 @@ import { getCourseDesign } from "@/lib/course-design";
 type CoursePageProps = {
   params: Promise<{ id: string }>;
 };
-
-export async function generateStaticParams() {
-  const courses = await getCourses();
-  return courses.map((course) => ({ id: course.id }));
-}
 
 export default async function CoursePage({ params }: CoursePageProps) {
   const { t, locale } = await getI18n();
