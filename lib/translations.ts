@@ -2,6 +2,11 @@ export type Locale = "en" | "ru";
 
 // Russian copy is the lookup key; technical names may be shared by both languages.
 const english: Record<string, string> = {
+  "Фильтр": "Filter",
+  "Фильтр курсов": "Course filter",
+  "Только курсы по выбору": "Electives only",
+  "Найди курс для своего следующего шага.": "Find a course for your next step.",
+  "Не удалось загрузить курсы": "Failed to load courses",
   "ТВОЙ СЛЕДУЮЩИЙ ШАГ": "YOUR NEXT STEP",
   "Большие идеи": "Big ideas",
   "начинаются": "start",

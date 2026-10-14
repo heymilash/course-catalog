@@ -50,6 +50,10 @@ export default async function RootLayout({ children }: LayoutProps<"/">) {
                 className="nav-link nav-courses rounded-full px-4 py-2 transition-colors hover:bg-orange-50"
               > {t("Курсы")} </Link>
               <Link
+                href="/filter"
+                className="nav-link rounded-full px-4 py-2 transition-colors hover:bg-orange-50"
+              > {t("Фильтр")} </Link>
+              <Link
                 href="/about"
                 className="nav-link nav-about rounded-full px-4 py-2 transition-colors hover:bg-orange-50"
               > {t("О проекте")} </Link>
