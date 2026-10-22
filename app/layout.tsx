@@ -1,15 +1,9 @@
 import { getI18n } from "@/lib/i18n";
 import type { Metadata } from "next";
 import Link from "next/link";
-import { Geist, Geist_Mono } from "next/font/google";
+import "./fonts.css";
 import "./globals.css";
 import LanguageSwitcher from "@/components/LanguageSwitcher";
-
-const geistSans = Geist({ variable: "--font-geist-sans", subsets: ["latin"] });
-const geistMono = Geist_Mono({
-  variable: "--font-geist-mono",
-  subsets: ["latin"],
-});
 
 export async function generateMetadata(): Promise<Metadata> {
  const { t } = await getI18n();
@@ -25,7 +19,7 @@ export default async function RootLayout({ children }: LayoutProps<"/">) {
   return (
     <html
       lang={locale}
-      className={`${geistSans.variable} ${geistMono.variable} antialiased`}
+      className="antialiased"
     >
       <body>
         <a href="#main-content" className="skip-link"> {t("Перейти к содержимому")} </a>
