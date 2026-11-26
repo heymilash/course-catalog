@@ -28,6 +28,5 @@ export async function gql<T>(
   if (!response.ok) throw new Error(`API error: ${response.status}`);
   const body: { data: T | null; errors?: GraphQLError[] } = await response.json();
   if (body.errors?.length) throw new GraphQLRequestError(body.errors);
-  if (body.data === null) throw new Error("GraphQL returned no data");
-  return body.data;
+  return body.data as T;
 }

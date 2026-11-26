@@ -1,6 +1,41 @@
 # Course Catalog
 
-Учебный каталог курсов для Advanced Web Technologies. Текущая версия — Lab 5: Next.js + FastAPI, CORS и контракт API.
+Учебный каталог курсов для Advanced Web Technologies. Текущая версия — Lab 8: две страницы «Мои курсы» через REST и GraphQL; изменения Lab 5 сохранены.
+
+## Lab 8 — REST и GraphQL
+
+Backend: [course-catalog-api](https://github.com/heymilash/course-catalog-api).
+Исходное состояние frontend до Lab 8 сохранено тегом `before-lab8`.
+
+- `lib/api.ts`: GET через REST, проверка HTTP-статуса, `cache: "no-store"`.
+- `lib/graphql.ts`: POST с query/variables, проверка HTTP-статуса и `body.errors`;
+  ошибки GraphQL становятся `GraphQLRequestError`.
+- `/my-courses-rest`: студент 2 и его записи загружаются через `Promise.all`,
+  затем во втором раунде загружаются три курса.
+- `/my-courses`: тот же экран одним GraphQL-запросом с переменной `id: "2"`.
+
+Запуск: `npm ci`, создать `.env.local`, затем `npm run dev`.
+
+```dotenv
+API_URL=http://localhost:8000
+NEXT_PUBLIC_API_URL=http://localhost:8000
+```
+
+На этом компьютере Lab 8 работает на **http://127.0.0.1:8008** — этот адрес уже
+указан в локальном `.env.local`. Backend нужно запустить перед открытием страниц.
+Открой http://localhost:3000/my-courses и http://localhost:3000/my-courses-rest.
+Обе показывают Данияра и три одинаковых курса с кредитами и уровнями.
+
+Реальные измерения backend: REST — **5 запросов / 2 раунда / 1145 байт / 5 SQL**;
+GraphQL — **1 запрос / 1 раунд / 339 байт / 3 SQL**. Значения байт зависят от данных.
+Подробные таблицы, восемь экспериментов и проверка пустой базы находятся в README backend.
+Запросы серверных компонентов видны в логе API, а не в браузерном Fetch/XHR.
+Проверены HTTP 200 обеих страниц, одинаковые данные, реальные 5/1 запросов;
+`npm run lint` и `npm run build` проходят, страницы динамические (`ƒ`).
+
+Старый `lib/courses.ts` сохранён. Форма записи из Lab 5 отправляет studentName,
+а API Lab 7/8 требует studentId: она относится к сохранённому этапу Lab 5 и
+не является формой записи Lab 8. Локальные `.env.local` не публикуются.
 
 ## Технологии
 
